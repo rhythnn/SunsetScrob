@@ -7,7 +7,7 @@ buildscript {
         maven("https://maven.fabric.io/public")
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:3.4.0-rc02")
+        classpath(Deps.androidGradlePlugin)
         classpath(kotlin("gradle-plugin", version = Deps.kotlinVersion))
         classpath("io.realm:realm-gradle-plugin:5.8.0")
         classpath("com.deploygate:gradle:1.1.4")

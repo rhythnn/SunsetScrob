@@ -2,6 +2,7 @@ object Deps {
     val kotlinVersion = "1.3.21"
 
     val appCompat = "androidx.appcompat:appcompat:1.0.2"
+    val androidGradlePlugin = "com.android.tools.build:gradle:3.4.0-rc02"
     val browser = "androidx.browser:browser:1.0.0"
     val cardView = "androidx.cardview:cardview:1.0.0"
     val constraintLayout = "androidx.constraintlayout:constraintlayout:1.1.3"
