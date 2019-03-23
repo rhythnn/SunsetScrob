@@ -119,6 +119,8 @@ dependencies {
     implementation(Deps.glide)
     kapt(Deps.glideCompiler)
 
+    implementation(Deps.pagingRuntime)
+
     testImplementation(Deps.junit)
     testImplementation(Deps.guava)
     testImplementation(Deps.kotlinTestJunit)
