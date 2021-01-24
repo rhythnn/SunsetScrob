@@ -44,3 +44,12 @@
 # Glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -dontwarn com.bumptech.glide.load.resource.bitmap.VideoDecoder
+
+-keep class com.facebook.jni.**  {  *;  }
+-keep class com.facebook.flipper.** {  *;  }
+
+-dontwarn com.facebook.litho.**
+-dontwarn com.facebook.flipper.**
+-dontwarn com.facebook.yoga.**
+-dontwarn org.mozilla.**
+-dontwarn com.facebook.fbui.**

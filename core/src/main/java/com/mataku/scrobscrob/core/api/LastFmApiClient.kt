@@ -1,5 +1,9 @@
 package com.mataku.scrobscrob.core.api
 
+import android.content.Context
+import com.facebook.flipper.android.AndroidFlipperClient
+import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
+import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
 import com.mataku.scrobscrob.core.BuildConfig
 import com.mataku.scrobscrob.core.api.endpoint.Endpoint
 import com.mataku.scrobscrob.core.api.okhttp.LastfmApiAuthInterceptor
@@ -18,8 +22,10 @@ import kotlinx.serialization.json.Json
 import okhttp3.logging.HttpLoggingInterceptor
 
 @ExperimentalCoroutinesApi
-object LastFmApiClient {
-    const val BASE_URL = "https://ws.audioscrobbler.com"
+class LastFmApiClient(val context: Context) {
+    companion object {
+        const val BASE_URL = "https://ws.audioscrobbler.com"
+    }
 
     val client: HttpClient
         get() {
@@ -34,6 +40,9 @@ object LastFmApiClient {
                         val logging = HttpLoggingInterceptor()
                         logging.level = HttpLoggingInterceptor.Level.BODY
                         addInterceptor(logging)
+                        val networkPlugin = AndroidFlipperClient.getInstance(context)
+                            .getPlugin<NetworkFlipperPlugin>(NetworkFlipperPlugin.ID)
+                        addNetworkInterceptor(FlipperOkhttpInterceptor(networkPlugin))
                     }
                 }
                 install(JsonFeature) {

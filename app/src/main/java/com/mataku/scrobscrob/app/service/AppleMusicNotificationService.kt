@@ -22,18 +22,26 @@ import com.mataku.scrobscrob.core.entity.Track
 import com.mataku.scrobscrob.core.entity.UpdateNowPlayingEvent
 import com.mataku.scrobscrob.core.entity.UpdateScrobbledListEvent
 import com.mataku.scrobscrob.core.util.AppUtil
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
+@ExperimentalCoroutinesApi
 class AppleMusicNotificationService : NotificationListenerService(), NotificationServiceInterface {
     private val APPLE_MUSIC_PACKAGE_NAME = "com.apple.android.music"
-    private val nowPlayingRepository = NowPlayingRepository(LastFmApiClient)
+    private val lastfmClient = LastFmApiClient(this.applicationContext)
+    private val nowPlayingRepository = NowPlayingRepository(lastfmClient)
     private val trackRepository: TrackRepository =
-        TrackRepository(LastFmApiClient)
-    private val scrobbleRepository = ScrobbleRepository(LastFmApiClient)
+        TrackRepository(lastfmClient)
+    private val scrobbleRepository = ScrobbleRepository(lastfmClient)
     private val presenter =
-        AppleMusicNotificationServicePresenter(this, nowPlayingRepository, trackRepository, scrobbleRepository)
+        AppleMusicNotificationServicePresenter(
+            this,
+            nowPlayingRepository,
+            trackRepository,
+            scrobbleRepository
+        )
     private lateinit var track: Track
     private var previousTrackName: String = ""
     private val appUtil = AppUtil()

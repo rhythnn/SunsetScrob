@@ -49,6 +49,9 @@ dependencies {
     implementation(Deps.okhttpLoggingInterceptor)
     implementation(Deps.kotlinSerializationRuntime)
     implementation(Deps.kotlinCoroutinesAndroid)
+    debugImplementation("com.facebook.flipper:flipper-network-plugin:0.66.0")
+    debugImplementation("com.facebook.flipper:flipper:0.66.0")
+
 
     kapt(Deps.glideCompiler)
 }

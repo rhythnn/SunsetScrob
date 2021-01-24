@@ -24,10 +24,12 @@ import com.mataku.scrobscrob.core.api.repository.MobileSessionRepository
 import com.mataku.scrobscrob.core.entity.Track
 import com.mataku.scrobscrob.core.entity.UpdateNowPlayingEvent
 import com.mataku.scrobscrob.databinding.ActivityLoginBinding
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 /**
  * A login screen that offers login via email/password.
  */
+@ExperimentalCoroutinesApi
 class LoginActivity : AppCompatActivity(), LoginViewCallback {
 
     private lateinit var userNameView: AutoCompleteTextView
@@ -35,12 +37,13 @@ class LoginActivity : AppCompatActivity(), LoginViewCallback {
     private lateinit var progressView: View
     private lateinit var loginFormView: View
 
-    private val repository = MobileSessionRepository(LastFmApiClient)
+    private val repository = MobileSessionRepository(LastFmApiClient(this))
     private lateinit var loginPresenter: LoginPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityLoginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        val binding: ActivityLoginBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_login)
         // Set up the login form.
         userNameView = binding.userName
         passwordView = binding.password
@@ -174,7 +177,11 @@ class LoginActivity : AppCompatActivity(), LoginViewCallback {
     }
 
     override fun showMessageToAllowAccessToNotification() {
-        Toast.makeText(this, "Allow Notification access to AppleMusicNotificationService", Toast.LENGTH_LONG).show()
+        Toast.makeText(
+            this,
+            "Allow Notification access to AppleMusicNotificationService",
+            Toast.LENGTH_LONG
+        ).show()
     }
 
     override fun backToSettingsActivity() {
@@ -197,7 +204,8 @@ class LoginActivity : AppCompatActivity(), LoginViewCallback {
         if (rawListeners == null || rawListeners == "") {
             return false
         } else {
-            val listeners = rawListeners.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
+            val listeners =
+                rawListeners.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
             listeners
                 .filter { it.startsWith(packageName) }
                 .forEach { return true }

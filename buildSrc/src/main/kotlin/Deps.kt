@@ -4,7 +4,7 @@ object Deps {
     private const val ktorVersion = "1.2.2"
 
     const val appCompat = "androidx.appcompat:appcompat:1.1.0"
-    const val androidGradlePlugin = "com.android.tools.build:gradle:4.1.0-beta03"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:4.2.0-alpha04"
     const val browser = "androidx.browser:browser:1.0.0"
     const val cardView = "androidx.cardview:cardview:1.0.0"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:1.1.3"
@@ -25,9 +25,9 @@ object Deps {
     const val koinAndroidXScope = "org.koin:koin-androidx-scope:2.0.1"
     const val koinAndroidXViewModel = "org.koin:koin-androidx-viewmodel:2.0.1"
 
-    const val kotlinCoroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7"
+    const val kotlinCoroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3"
     const val kotlinSerializationRuntime =
-        "org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.20.0"
+        "org.jetbrains.kotlinx:kotlinx-serialization-runtime:0.14.0"
     const val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 
     const val ktorClientOkhttp = "io.ktor:ktor-client-okhttp:$ktorVersion"
