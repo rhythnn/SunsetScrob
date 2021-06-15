@@ -1,13 +1,16 @@
 package com.mataku.scrobscrob.core.api.repository
 
-import com.mataku.scrobscrob.core.api.LastFmApiClient
+import com.mataku.scrobscrob.core.api.LastFmApiService
 import com.mataku.scrobscrob.core.api.endpoint.AuthMobileSessionApiResponse
 import com.mataku.scrobscrob.core.api.endpoint.AuthMobileSessionEndpoint
 import com.mataku.scrobscrob.core.api.endpoint.MobileSession
 import com.mataku.scrobscrob.core.entity.presentation.SunsetResult
 import com.mataku.scrobscrob.core.util.AppUtil
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class MobileSessionRepository(private val apiClient: LastFmApiClient) {
+@Singleton
+class MobileSessionRepository @Inject constructor(val apiService: LastFmApiService) {
     suspend fun authorize(userName: String, password: String): SunsetResult<MobileSession> {
         val params = mutableMapOf(
             "username" to userName,
@@ -19,7 +22,7 @@ class MobileSessionRepository(private val apiClient: LastFmApiClient) {
 
         return try {
             val result =
-                apiClient.post<AuthMobileSessionApiResponse>(AuthMobileSessionEndpoint(params = params))
+                apiService.post<AuthMobileSessionApiResponse>(AuthMobileSessionEndpoint(params = params))
             result.mobileSession?.let {
                 SunsetResult.success(it)
             } ?: SunsetResult.failure(Throwable())

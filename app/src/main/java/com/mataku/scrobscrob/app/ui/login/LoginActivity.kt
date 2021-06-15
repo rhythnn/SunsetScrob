@@ -16,15 +16,17 @@ import androidx.databinding.DataBindingUtil
 import com.mataku.scrobscrob.R
 import com.mataku.scrobscrob.app.model.RxEventBus
 import com.mataku.scrobscrob.app.ui.settings.SettingsActivity
-import com.mataku.scrobscrob.core.api.LastFmApiClient
 import com.mataku.scrobscrob.core.api.repository.MobileSessionRepository
 import com.mataku.scrobscrob.core.entity.Track
 import com.mataku.scrobscrob.core.entity.UpdateNowPlayingEvent
 import com.mataku.scrobscrob.databinding.ActivityLoginBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * A login screen that offers login via email/password.
  */
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity(), LoginViewCallback {
 
     private lateinit var userNameView: EditText
@@ -32,7 +34,8 @@ class LoginActivity : AppCompatActivity(), LoginViewCallback {
     private lateinit var progressView: View
     private lateinit var loginFormView: View
 
-    private val repository = MobileSessionRepository(LastFmApiClient)
+    @Inject
+    lateinit var repository: MobileSessionRepository
     private lateinit var loginPresenter: LoginPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
