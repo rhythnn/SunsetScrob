@@ -5,6 +5,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlinx-serialization'
+apply plugin: 'dagger.hilt.android.plugin'
+
 
 apply from: "$project.rootDir/test_dependencies.gradle"
 apply from: "$project.rootDir/test_options.gradle"
@@ -57,6 +59,9 @@ dependencies {
     implementation(Deps.okhttpLoggingInterceptor)
     implementation(Deps.kotlinSerializationRuntime)
     implementation(Deps.kotlinCoroutinesAndroid)
+
+    implementation Deps.hilt
+    kapt Deps.hiltCompiler
 
     kapt(Deps.glideCompiler)
 }
